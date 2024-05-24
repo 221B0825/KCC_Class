@@ -22,6 +22,5 @@ public class ArrayExam02 {
 			}
 		}
 		
-		// 126 ~ 167 배열
 	}
 }
