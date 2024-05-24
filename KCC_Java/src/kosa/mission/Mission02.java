@@ -29,5 +29,19 @@ public class Mission02 {
 
 		System.out.println("총점: " + total);
 		System.out.println("평균: " + aver);
+		
+		//학점 90이상 A 80이상 B, 70이상 C, 60이상 D 나머지 F
+		
+		if(aver >= 90) {
+			System.out.println("A");
+		}else if(aver >= 80) {
+			System.out.println("B");
+		}else if(aver >= 70) {
+			System.out.println("C");
+		}else if(aver >= 60) {
+			System.out.println("D");
+		}else {
+			System.out.println("F");
+		}
 	}
 }
