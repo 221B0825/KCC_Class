@@ -1,4 +1,4 @@
-package kosa.mission;
+package kosa.mission01;
 
 public class Mission01 {
 
