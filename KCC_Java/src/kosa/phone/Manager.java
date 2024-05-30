@@ -30,10 +30,38 @@ public class Manager {
 	}
 
 	public void listPhoneInfo() {
-		System.out.println("***전체출력***");
+		System.out.println("**전체내역**");
 		for (int i = 0; i < count; i++) {
 			arr[i].show();
 		}
+	}
+
+	public void searchPhoneInfo() {
+		// 검색하고자 하는 이름으로 1개의 PhoneInfo객체의 내용을 출력한다.
+		System.out.print("이름: ");
+		String name = sc.nextLine();
+
+		int idx = -1;
+
+		for (int i = 0; i < count; i++) {
+			if (arr[i].getName().equals(name)) {
+				arr[i].show();
+				idx = i;
+			}
+		}
+
+		if (idx == -1) {
+			System.out.println("유저를 찾을 수 없습니다.");
+		}
+
+	}
+	
+	public void updatePhoneInfo() {
+		// 이름 입력 => 해당 phoneInfo 추출 => 수정 전화번호 입력 => 전화번호 수정 완료
+	}
+	
+	public void deletePhoneInfo() {
+		// 이름 입력 => 대상 객체 검색 => 인덱스 찾기 => 해당 객체 삭제
 	}
 
 }

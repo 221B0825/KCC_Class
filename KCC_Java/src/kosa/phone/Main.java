@@ -18,6 +18,9 @@ public class Main {
 				m.listPhoneInfo();
 				break;
 			case "3":
+				m.searchPhoneInfo();
+				break;
+			case "4":
 				System.out.println("프로그램 종료");
 				return;
 			default:
@@ -27,7 +30,7 @@ public class Main {
 	}
 
 	private static void printMenu() {
-		System.out.println("1.추가 2.전체출력 3.종료");
+		System.out.println("1.추가 2.전체출력 3.검색 4.종료");
 		System.out.print("메뉴입력: ");
 	}
 
