@@ -11,9 +11,9 @@ public class AccountMain {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("계좌번호: " + account.accountNo);
-		System.out.println("계좌주: " + account.ownerName);
-		System.out.println("잔액: " + account.balance);
+		System.out.println("계좌번호: " + account.getAccountNo());
+		System.out.println("계좌주: " + account.getOwnerName());
+		System.out.println("잔액: " + account.getBalance());
 
 	}
 }

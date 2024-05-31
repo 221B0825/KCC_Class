@@ -6,12 +6,13 @@ public class Account {
 	// 상태(데이터): 계좌번호, 계좌주, 잔액 => 멤버변수
 	// 행동(기능): 입금하다, 출금하다 => 멤버 메소드
 
-	String accountNo; // 계좌번호
-	String ownerName; // 계좌주
-	int balance; // 잔액
+	private String accountNo; // 계좌번호
+	private String ownerName; // 계좌주
+	private int balance; // 잔액
 
 	// 디폴트 생성자
 	public Account() {
+	
 	}
 
 	public Account(String accountNo, String ownerName, int balnace) {
@@ -32,6 +33,34 @@ public class Account {
 		}
 		this.balance -= amount;
 		return amount;
+	}
+
+	public String getAccountNo() {
+		return accountNo;
+	}
+
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+
+	public void print() {
+		System.out.println("부모");
 	}
 
 }

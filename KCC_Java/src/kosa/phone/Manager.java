@@ -7,12 +7,12 @@ public class Manager {
 
 	// 필드 변수들은 기본적으로 초기값이 존재함 (null 또는 0)
 	private PhoneInfo arr[];
-	private Scanner sc;
+	private Scanner sc = DataInput.sc;
 	private int count;
 
 	public Manager() {
 		arr = new PhoneInfo[10];
-		sc = new Scanner(System.in);
+//		sc = new Scanner(System.in);
 	}
 
 	public void addPhoneInfo() {
@@ -55,13 +55,53 @@ public class Manager {
 		}
 
 	}
-	
+
 	public void updatePhoneInfo() {
 		// 이름 입력 => 해당 phoneInfo 추출 => 수정 전화번호 입력 => 전화번호 수정 완료
+		System.out.print("이름: ");
+		String name = sc.nextLine();
+		int idx = -1;
+
+		for (int i = 0; i < count; i++) {
+			if (arr[i].getName().equals(name)) {
+				System.out.print("수정 전화번호: ");
+				String phoneNo = sc.nextLine();
+				arr[i].setPhoneNo(phoneNo);
+				idx = i;
+			}
+		}
+
+		if (idx == -1) {
+			System.out.println("유저를 찾을 수 없습니다.");
+		}
+
 	}
-	
+
 	public void deletePhoneInfo() {
 		// 이름 입력 => 대상 객체 검색 => 인덱스 찾기 => 해당 객체 삭제
+		System.out.print("이름: ");
+		String name = sc.nextLine();
+		int idx = -1;
+
+		for (int i = 0; i < count; i++) {
+			if (arr[i].getName().equals(name)) {
+				idx = i;
+			}
+		}
+
+		if (idx == -1) {
+			System.out.println("유저를 찾을 수 없습니다.");
+		} else {
+			for (int i = idx; i < count; i++) {
+				if (i == arr.length - 1) {
+					arr[i] = null;
+					break;
+				}
+				arr[i] = arr[i + 1];
+			}
+			count--;
+		}
+
 	}
 
 }
