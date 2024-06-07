@@ -16,10 +16,17 @@ public class PhoneInfo {
 		this.birth = birth;
 	}
 	
+	public PhoneInfo getPhoneInfo(String name) {
+		if(this.name.equals(name)) {
+			return this;
+		}
+		return null;
+	}
+
 	public void show() {
-		System.out.println("이름: "+name);
-		System.out.println("전화번호: "+phoneNo);
-		System.out.println("생년월일: "+birth);
+		System.out.println("이름: " + name);
+		System.out.println("전화번호: " + phoneNo);
+		System.out.println("생년월일: " + birth);
 	}
 
 	public String getName() {
