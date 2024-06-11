@@ -1,10 +1,19 @@
 package kosa.phone;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 // 전화번호 관리 전반적인 기능
 public class Manager {
@@ -34,9 +43,7 @@ public class Manager {
 
 	public void listPhoneInfo() {
 		System.out.println("**전체내역**");
-		for (PhoneInfo p : phoneInfoList) {
-			p.show();
-		}
+		this.phoneInfoList.stream().forEach(p -> p.show());
 	}
 
 	public void searchPhoneInfo() {
@@ -44,18 +51,12 @@ public class Manager {
 		System.out.print("이름: ");
 		String name = sc.nextLine();
 
-		int idx = -1;
-
-		for (PhoneInfo p : phoneInfoList) {
-			if (p.getPhoneInfo(name) != null) {
+		Stream<PhoneInfo> phoneStream = phoneInfoList.stream();
+		phoneStream.forEach(p -> {
+			if (p.getName().equals(name)) {
 				p.show();
-				idx = 1;
 			}
-		}
-
-		if (idx == -1) {
-			System.out.println("유저를 찾을 수 없습니다.");
-		}
+		});
 
 	}
 
@@ -63,41 +64,25 @@ public class Manager {
 		// 이름 입력 => 해당 phoneInfo 추출 => 수정 전화번호 입력 => 전화번호 수정 완료
 		System.out.print("이름: ");
 		String name = sc.nextLine();
-		int idx = -1;
-
-		for (PhoneInfo p : phoneInfoList) {
+		phoneInfoList.stream().forEach(p -> {
 			if (p.getName().equals(name)) {
 				System.out.print("수정 전화번호: ");
-				String phoneNo = sc.nextLine();
-				p.setPhoneNo(phoneNo);
-				idx = 1;
+				p.setPhoneNo(sc.nextLine());
 			}
-		}
-
-		if (idx == -1) {
-			System.out.println("유저를 찾을 수 없습니다.");
-		}
+		});
 
 	}
 
-	public void deletePhoneInfo() {
+	public void deletePhoneInfo() throws Exception {
 		// 이름 입력 => 대상 객체 검색 => 인덱스 찾기 => 해당 객체 삭제
 		System.out.print("이름: ");
 		String name = sc.nextLine();
-		int idx = -1;
 
-		for (PhoneInfo p : phoneInfoList) {
-			if (p.getPhoneInfo(name) != null) {
-				phoneInfoList.remove(p);
-				idx = 1;
-				break;
-			}
-		}
+		Stream<PhoneInfo> phoneStream = phoneInfoList.stream();
+		PhoneInfo first = phoneStream.filter(p -> p.getName().equals(name)).findFirst()
+				.orElseThrow(() -> new Exception("검색 기록이 없습니다"));
 
-		if (idx == -1) {
-			System.out.println("유저를 찾을 수 없습니다.");
-		}
-
+		this.phoneInfoList.remove(first);
 	}
 
 	public void sortPhoneInfo() {
@@ -218,6 +203,42 @@ public class Manager {
 			break;
 		}
 
+	}
+
+	public void savePhoneInfo() {
+		ObjectOutputStream oos = null;
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream(new File("phoneInfo.ser")));
+			oos.writeObject(this.phoneInfoList);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			try {
+				oos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void openPhoneInfo() {
+		ObjectInputStream ois = null;
+		try {
+			ois = new ObjectInputStream(new FileInputStream("phoneInfo.ser"));
+			this.phoneInfoList = (List<PhoneInfo>)ois.readObject();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				ois.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

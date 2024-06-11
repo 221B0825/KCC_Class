@@ -1,6 +1,8 @@
 package kosa.phone;
 
-public class PhoneInfo {
+import java.io.Serializable;
+
+public class PhoneInfo implements Serializable{
 	// (name, phoneNo, birth)
 	private String name;
 	private String phoneNo;

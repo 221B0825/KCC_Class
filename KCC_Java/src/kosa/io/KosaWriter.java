@@ -48,7 +48,7 @@ public class KosaWriter {
 		}
 
 		try {
-			writer = new FileWriter("poem2.txt", true);
+			writer = new FileWriter("poem2.txt");
 			writer.write(poem);
 		} catch (Exception e) {
 			// TODO: handle exception
